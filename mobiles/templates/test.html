@@ -1,0 +1,77 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<div class="container-fluid">
+     <div class="row">
+         <div class="col-md-9">
+             <ul class="nav">
+    <li class="nav-item">
+        <a class="nav-link active" href="{% url 'mobiles:index'%}">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">mobiles</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="#">Accessories</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#"> Other products</a>
+    </li>
+
+
+    <li class="nav-item">
+
+            <form class="nav-form" role="search" method="get" action="{% url 'mobiles:index' %}">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="q" value="{{ request.GET.q }}">
+
+                <button type="submit" class="btn btn-default">Search</button></div>
+</form>
+
+    </li>
+                 </ul>
+
+             <div class="container">
+<div class="jumbotron text-center" style="background-color:greenyellow">
+    <h1 style="text-blink: 02"> Mobile Store</h1>
+    <p>Mobile phones,Accessories and Other products</p>
+</div>
+</div>
+
+
+
+<h2>Mobiles list</h2>
+<ul>
+
+    {% for device in all_devices %}
+    <li><a href="/mobiles/{{device.id}}/">{{ device.device_name}}-{{ device.device_model}}</a></li>
+    {% endfor %}
+</ul>
+</div>
+
+         <div class="col-md-3">
+             <ul class="nav">
+                 {% if user.is_authenticated %}
+
+
+                 <li class="nav-item"><a href="#">{{ user.get_username }}</a></li>
+
+     <li class="nav-item">
+         <a href="{% url 'mobiles:logout_user'%}?next={{request.path}}">Logout</a>
+     </li>
+   {% else %}
+     <li class="nav-item">
+         <a href="{% url 'mobiles:login_user'%}?next={{request.path}}">Login</a>
+     </li>
+                 <li class="nav-item">
+        <a class="nav-link" href="{% url 'mobiles:register'%}">Create Account</a>
+    </li>
+   {% endif %}
+    <li>
+             </ul>
+         </div>
+
+     </div>
+<</div>

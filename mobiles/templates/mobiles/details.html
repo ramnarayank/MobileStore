@@ -1,0 +1,11 @@
+<h1>{{device.device_name}}</h1>
+<h1>{{device.device_model}}</h1>
+
+<ul>
+    {% for details in device.devicedetails_set.all %}
+        <li>
+            {{details.device_price}}
+            {{details.device_memory}}
+        </li>
+    {% endfor %}
+</ul>
